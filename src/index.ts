@@ -1,9 +1,10 @@
+import colors from 'colors';
 import server from "./server"
 
 
 const port = process.env.PORT || 4000;
  server.listen(port, ()=>{
-     console.log("Server Corriendo en el puerto:", port)
+     console.log(colors.blue.bold("Server Corriendo en el puerto:"), port)
  })
 
 
