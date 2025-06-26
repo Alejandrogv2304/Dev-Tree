@@ -50,4 +50,16 @@ export const login = async(req: Request,res: Response)=>{
    res.status(400).json({errors: errors.array()})
    return
   }
+
+  //Buscamos si está registrado
+  const {email, password } = req.body;
+  const user = await User.findOne({email});
+ 
+  if(!user){
+    const error = new Error('El usuario no existe')
+     res.status(401).json({error : error.message})
+     return
+  }
+
+  //Comprobamos el password
 }
