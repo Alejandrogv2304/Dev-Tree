@@ -6,6 +6,7 @@ export interface IUser{
     name:string
     email:string
     password:string
+    description:string
 }
 const userSchema = new Schema({
     handle :{
@@ -31,6 +32,11 @@ const userSchema = new Schema({
     type:String,
     required:true,
     trim:true
+    },
+    description:{
+    type:String,
+    required:false,
+    default:''
     }
 })
 
