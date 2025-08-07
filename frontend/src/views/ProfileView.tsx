@@ -7,12 +7,12 @@ import { updateProfile, uploadImage } from '../api/DevTreeAPI';
 
 export default function ProfileView() {
     const queryClient = useQueryClient()
-    const data : User = queryClient.getQueryData(['data'])!
+    const data : User = queryClient.getQueryData(['user'])!
 
 
     const { register, handleSubmit, formState:{errors}} = useForm<ProfileForm>({defaultValues:{
-        handle: '',
-        description: ''
+        handle: data?.handle,
+        description: data?.description
     }});
 
     const updateProfileMutation = useMutation({
@@ -50,9 +50,10 @@ export default function ProfileView() {
         }
 
     const handleUserProfileForm = (formData: ProfileForm) =>{
-        // console.log(formData)
-
-        updateProfileMutation.mutate(formData)
+    const user : User = queryClient.getQueryData(['user'])!
+    user.description = formData.description
+    user.handle = formData.handle
+    updateProfileMutation.mutate(user)
     }
     return (
         <form 
